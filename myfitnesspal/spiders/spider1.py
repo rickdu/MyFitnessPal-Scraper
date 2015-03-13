@@ -1,3 +1,4 @@
+#coding=utf-8
 import urlparse
 
 from scrapy.contrib.spiders import CrawlSpider, Rule
@@ -9,6 +10,7 @@ import BeautifulSoup
 import HTMLParser
 
 INDEX = [
+        'Id',
         'Name', 
         'Servings', 
         'Calories', 
@@ -40,6 +42,8 @@ def getNutrtionValuesCSV(nutritionHTML):
     
     details = []
 
+    # Food Id
+    details.append(soup.find("input", {"data-food-id" : True})['data-food-id'])
     # Food Name
     details.append(soup.find("h2", {"class" : "food-description"}).text)
 
